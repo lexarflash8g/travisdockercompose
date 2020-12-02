@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t stephenrider/react-test -f ./client/Dockerfile.dev ./client
+  
+script:
+  - docker run stephengrider/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t lexarflash8g/multi-client ./client
+  - docker build -t lexarflash8g/multi-nginx ./nginx
+  - docker build -t lexarflash8g/multi-server ./server
+  - docker build -t lexarflash8g/multi-worker ./worker
+
+  - echo "$DOCKER_PASSWORD | docker login - u "$DOCKER_ID" --password-stdin
+
+  - docker push lexarflash8g/multi-client
+  - docker push lexarflash8g/multi-nginx
+  - docker push lexarflash8g/multi-server
+  - docker push lexarflash8g/multi-worker
