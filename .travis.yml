@@ -3,10 +3,10 @@ services:
   - docker
 
 before_install:
-  - docker build -t stephenrider/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t lexarflash8g/react-test -f ./client/Dockerfile.dev ./client
   
 script:
-  - docker run stephengrider/react-test npm test -- --coverage
+  - docker run lexarflash8g/react-test npm test -- --coverage
 
 after_success:
   - docker build -t lexarflash8g/multi-client ./client
