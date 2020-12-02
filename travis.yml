@@ -9,7 +9,9 @@ script:
   - docker run stephengrider/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t stephengrider/multi-client ./client
-  - docker build -t stephengrider/multi-nginx ./nginx
-  - docker build -t stephengrider/multi-server ./server
-  - docker build -t stephengrider/multi-worker ./worker
+  - docker build -t lexarflash8g/multi-client ./client
+  - docker build -t lexarflash8g/multi-nginx ./nginx
+  - docker build -t lexarflash8g/multi-server ./server
+  - docker build -t lexarflash8g/multi-worker ./worker
+
+  - echo "$DOCKER_PASSWORD | docker login - u "$DOCKER_ID" --password-stdin
