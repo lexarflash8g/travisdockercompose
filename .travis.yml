@@ -20,3 +20,14 @@ after_success:
   - docker push lexarflash8g/multi-nginx
   - docker push lexarflash8g/multi-server
   - docker push lexarflash8g/multi-worker
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-us-east-2-130405883059
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
